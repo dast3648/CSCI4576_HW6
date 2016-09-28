@@ -1,5 +1,7 @@
 //	Daniel Strawn
 //	CSCI-4576
+//	Implementation of Fox's algorithm based predominantly on Pacheco's reference implementaion
+//	modified to use csv inputs rather than scanf
 
 #include <getopt.h>
 #include <math.h>
@@ -59,8 +61,10 @@ int main(
 	int				opt;
 	int				my_rank;
 	int				p;
-
 	int				m;
+
+	double			start;
+	double			finish;
 
 	char*			csvFile;
 
@@ -127,10 +131,8 @@ int main(
 		if (sqrt(p) != floor(sqrt(p)))
 		{
 			printf("Process count must be a square number, aborting. Entered count: %d\n", p);
-			return 0;
+			exit(-1);
 		}
-		else
-			printf("Process count valid. Entered count: %d\n", p);
 
 		if ( (n*n)%(p) != 0 )
 		{
@@ -140,7 +142,7 @@ int main(
 			printf("Root Process count: %d\n", p);
 			printf("Remainder: %d\n", (n*n)%(p));
 		}
-		printf("nension: %d\n", n);
+		//printf("Dimension: %d\n", n);
 	}
 
 	MPI_Bcast(&n, 1, MPI_INT, 0, MPI_COMM_WORLD);
@@ -154,15 +156,21 @@ int main(
 				Order(local_C)	=	n_bar;
 
 	Read_matrix(csvFile, local_A, &grid, n);
-	Print_matrix("Input Matrix: ", local_A, &grid, n);
+	//Print_matrix("Input Matrix: ", local_A, &grid, n);
 	Read_matrix(csvFile, local_B, &grid, n);
 
 	Build_matrix_type(local_A);
 				temp_mat		=	Local_matrix_allocate(n_bar);
 
-	Fox(n, &grid, local_A, local_B, local_C);
+				start			=	MPI_Wtime();
+		Fox(n, &grid, local_A, local_B, local_C);
+				finish			=	MPI_Wtime();
+				finish			-=	start;
+				finish			*=	1000000.0;
+		if (my_rank == 0)
+		printf("Runtime w/ Fox with %d processes on a %d n*n matrix: %4.0f microseconds\n", p, n, finish);
 
-	Print_matrix("Result:", local_C, &grid, n);
+	//Print_matrix("Result:", local_C, &grid, n);
 
 	Free_local_matrix(&local_A);
 	Free_local_matrix(&local_B);
@@ -317,7 +325,7 @@ void Read_matrix(
 		CsvRow*			matRow;
 						matRow		=	CsvParser_getRow(mat);
 						numACols	=	CsvParser_getNumFields(matRow);
-		printf("Reading csv...\n");
+		//printf("Reading csv...\n");
 		do
 		{
 			const char	**rowFields = CsvParser_getFields(matRow);
