@@ -1,6 +1,6 @@
 //	Daniel Strawn
 //	CSCI-4576
-//	Implementation of Fox's algorithm based predominantly on Pacheco's reference implementaion
+//	Implementation of Fox's algorithm based predominantly on Pacheco's reference implementation
 //	modified to use csv inputs rather than scanf
 
 #include <getopt.h>

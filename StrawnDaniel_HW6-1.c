@@ -1,5 +1,6 @@
 //	Daniel Strawn
 //	CSCI-4576
+//	Simple Serial Matrix Multiplication
 
 #include <stdio.h>
 #include <stdlib.h>

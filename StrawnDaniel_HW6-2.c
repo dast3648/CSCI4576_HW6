@@ -1,5 +1,7 @@
 //	Daniel Strawn
 //	CSCI-4576
+//	Parallel Scatter/Gather-based Matrix Multiplication
+//	Compiles, but does not run.
 
 #include <stdio.h>
 #include <stdlib.h>
