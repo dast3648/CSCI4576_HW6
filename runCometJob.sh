@@ -8,7 +8,7 @@
 #SBATCH --export=ALL  
 #SBATCH -t 00:10:00
 
-ibrun -v ../StrawnDaniel_HW6-3 -m 144
-ibrun -v ../StrawnDaniel_HW6-3 -m 576
-ibrun -v ../StrawnDaniel_HW6-3 -m 1152
-ibrun -v ../StrawnDaniel_HW6-3 -m 2304
+ibrun -v ./StrawnDaniel_HW6-3 -m 144
+ibrun -v ./StrawnDaniel_HW6-3 -m 576
+ibrun -v ./StrawnDaniel_HW6-3 -m 1152
+ibrun -v ./StrawnDaniel_HW6-3 -m 2304
