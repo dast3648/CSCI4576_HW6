@@ -1,0 +1,4 @@
+Runtime w/ Fox with 144 processes on a 144 n*n matrix: 11200 microseconds
+Runtime w/ Fox with 144 processes on a 576 n*n matrix: 13419 microseconds
+Runtime w/ Fox with 144 processes on a 1152 n*n matrix: 108848 microseconds
+Runtime w/ Fox with 144 processes on a 2304 n*n matrix: 313024 microseconds
